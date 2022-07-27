@@ -1,9 +1,10 @@
 FROM debian:buster
 
-RUN apt update -y && apt install -y nginx 
+RUN apt update -y && apt install -y nginx && apt install -y  openssl
+
+RUN mkdir -p /etc/nginx/ssl && openssl req -newkey rsa:2048 -x509 -days 365 -nodes -out /etc/nginx/ssl/localhost.crt -keyout /etc/nginx/ssl/localhost.key -subj "/C=FR/ST=France/L=Paris/O=Me/OU=42Paris/CN=localhost/emailAddress=viporten@student.42.fr"
 
 COPY ./config/viporten_config /etc/nginx/sites-enabled/viporten.42.fr
 
-EXPOSE 8080
 
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
