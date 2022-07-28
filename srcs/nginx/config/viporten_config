@@ -19,8 +19,8 @@
 # Default server configuration
 #
 server {
-	listen 8080;
-	listen [::]:8080;
+	listen 8080 ssl;
+	listen [::]:8080 ssl;
 
 	server_name viporten.42.fr;
 	# SSL configuration
